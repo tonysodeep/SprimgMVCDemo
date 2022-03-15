@@ -22,7 +22,8 @@
         <!--menu-->
         <nav class="navbar navbar-expand-md bg-dark navbar-dark">
             <!-- Brand -->
-            <a class="navbar-brand" href="#">Navbar</a>
+            <c:url value="/" var="homePage"/>
+            <a class="navbar-brand" href="${homePage}">E-commerce Website</a>
 
             <!-- Toggler/collapsibe Button -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -30,20 +31,66 @@
             </button>
 
             <!-- Navbar links -->
+
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <a class="nav-link" href="${homePage}">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
+                    <c:forEach items="${categories}" var="c">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">${c.name}</a>
+                        </li>
+                    </c:forEach>
                 </ul>
             </div>
+            <c:url value="/" var="homeAction"/>
+            <form class="form-inline" action="${homeAction}">
+                <input class="form-control mr-sm-2" 
+                       name="kw"
+                       type="text" 
+                       placeholder="nhap tu khoa">
+                <button class="btn btn-success" type="submit">Search</button>
+            </form>
         </nav>
+
+        <!--body-->
+
+        <div class="container">
+            <h1 class="text-center text-info" >Product list </h1>
+
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                    <c:forEach begin="1" end="${Math.ceil(productCounter/6)}" var="i">
+                        <c:url value="/" var="myAction">
+                            <c:param name="page" value="${i}"/>
+                        </c:url>
+                    <li class="page-item"><a class="page-link" href="${myAction}">${i}</a></li>
+                    </c:forEach>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+            <div class="row">
+                <c:forEach items="${products}" var="p">
+                    <div class="col-md-4 col-sm-12" style="padding: 10px">
+                        <div class="card">
+                            <img class="card-img-top" src="${p.image}" alt="${p.name}">
+                            <div class="card-body">
+                                <h4 class="card-title">${p.name}</h4>
+                                <p class="card-text">${p.price} VND</p>
+                                <a href="#" class="btn btn-primary">See Detail</a>
+                                <a href="#" class="btn btn-danger">add to card</a>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
+
+        <!--footer-->
+        <div class="jumbotron">
+            <h1>E-commer Website</h1>
+            <p>Nguyen gia hy &copy; 2022</p>
+        </div>
 
     </body>
 </html>

@@ -19,15 +19,16 @@ import org.springframework.transaction.annotation.Transactional;
  * @author hyngu
  */
 @Repository
+@Transactional
 public class CategoryRepositoryImpl implements CategoryRepository {
 
     @Autowired
     private LocalSessionFactoryBean sessionFactoryBean;
 
     @Override
-    @Transactional
+   
     public List<Category> getCategories() {
-        Session session = sessionFactoryBean.getObject().getCurrentSession();
+        Session session = sessionFactoryBean.getObject().openSession();
         Query q = session.createQuery("From Category");
         return q.getResultList();
     }
