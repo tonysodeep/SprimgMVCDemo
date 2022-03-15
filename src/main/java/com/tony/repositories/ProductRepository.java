@@ -15,4 +15,6 @@ public interface ProductRepository {
 
     List<Product> getProducts(String kw, int page);
     int countProducts();
+    boolean addOrUpdateProduct(Product p);
+    
 }

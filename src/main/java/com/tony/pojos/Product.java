@@ -22,9 +22,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -64,9 +66,12 @@ public class Product implements Serializable {
     private String image;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
     private List<ProdTag> prodTagList;
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
-    @ManyToOne
-    private Category categoryId;
+    @JoinColumn(name = "category_id")
+    @ManyToOne(optional = false)
+    private Category category;
+
+    @Transient
+    private MultipartFile file;
 
     public Product() {
     }
@@ -115,6 +120,20 @@ public class Product implements Serializable {
         this.createDate = createDate;
     }
 
+    /**
+     * @return the category
+     */
+    public Category getCategory() {
+        return category;
+    }
+
+    /**
+     * @param category the category to set
+     */
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public String getImage() {
         return image;
     }
@@ -130,14 +149,6 @@ public class Product implements Serializable {
 
     public void setProdTagList(List<ProdTag> prodTagList) {
         this.prodTagList = prodTagList;
-    }
-
-    public Category getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Category categoryId) {
-        this.categoryId = categoryId;
     }
 
     @Override
@@ -164,5 +175,19 @@ public class Product implements Serializable {
     public String toString() {
         return "com.tony.pojos.Product[ id=" + id + " ]";
     }
-    
+
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
+
 }

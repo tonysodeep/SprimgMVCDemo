@@ -13,4 +13,6 @@ D:\JavaSpringMVC\SpringWeb\src\main\java\com\tony\repositories\impl\ProductRepos
 D:\JavaSpringMVC\SpringWeb\src\main\java\com\tony\pojos\Category.java
 D:\JavaSpringMVC\SpringWeb\src\main\java\com\tony\configs\WebAppContextConfig.java
 D:\JavaSpringMVC\SpringWeb\src\main\java\com\tony\configs\DispatcherServletInit.java
+D:\JavaSpringMVC\SpringWeb\src\main\java\com\tony\fomatter\CategoryFormatter.java
 D:\JavaSpringMVC\SpringWeb\src\main\java\com\tony\pojos\Product.java
+D:\JavaSpringMVC\SpringWeb\src\main\java\com\tony\controllers\ProductController.java

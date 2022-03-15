@@ -50,6 +50,8 @@ public class ProductRepositoryImpl implements ProductRepository {
             q.where(p);
         }
 
+        q.orderBy(b.desc(root.get("id")));
+
         Query query = session.createQuery(q);
 
         int pageSize = Integer.parseInt(env.getProperty("info.page_size"));
@@ -69,6 +71,19 @@ public class ProductRepositoryImpl implements ProductRepository {
         Query q = session.createQuery("SELECT COUNT(*) FROM Product");
         Object re = q.getSingleResult();
         return Integer.parseInt(re.toString());
+    }
+
+    @Override
+    public boolean addOrUpdateProduct(Product p) {
+        Session session = this.sessionFactoryBean.getObject().openSession();
+        try {
+            session.save(p);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+
     }
 
 }

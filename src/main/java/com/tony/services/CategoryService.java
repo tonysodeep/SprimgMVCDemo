@@ -12,6 +12,6 @@ import java.util.List;
  * @author hyngu
  */
 public interface CategoryService {
-      List<Category> getCategories();
-    
+
+    List<Category> getCategories();
 }
